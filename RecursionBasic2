@@ -1,0 +1,71 @@
+#include<iostream>
+using namespace std;
+
+bool isSorted(int arr[],int n){
+    
+    if(n==1){
+      return true;  
+    }
+    bool result = isSorted(arr+1,n-1);
+    
+    return ((arr[0]<arr[1])&&result);
+}
+
+void decArray(int n){
+    
+    if(n==1){
+        cout<<" 1"<<endl;
+        return;
+    }
+    cout<<" "<<n;
+    decArray(n-1);
+}
+
+void incArray(int n){
+        if(n==1){
+        cout<<" 1";
+        return;
+    }
+    incArray(n-1);
+    cout<<" "<<n;
+}
+
+int firstOccurence(int array[],int n, int i, int key){
+    if(i==n){
+        return -1;
+    }
+    
+    if(array[i]==key){
+        return i;
+    }
+    
+    return firstOccurence(array,n,i+1,key);
+}
+int lastOccurence(int array[],int n,int i,int key){
+     if(i==n){
+        return -1;
+    }
+    int lastAppearance=lastOccurence(array,n,i+1,key);
+    if(lastAppearance!=-1){
+        return lastAppearance;
+    }
+    if(array[i]==key){
+        return i;
+    }
+    return -1;
+    
+}
+int main()
+{
+    int arr[5]={1,2,3,5,4};
+    cout<<"Is array Sorted "<<isSorted(arr,5)<<endl;
+    cout<<"Decreasing Array from N ";
+    decArray(5);
+    cout<<endl<<"Increasing Array Till N ";
+    incArray(5);
+    int array[5]={3,4,3,6,4};
+    cout<<endl<<"First Occurence Of The key "<<firstOccurence(array,5,0,3)<<endl;
+    int a[5]={3,4,3,6,4};
+    cout<<"Last Occurence Of The Key "<<lastOccurence(a,5,0,3);
+    return 0;
+}
