@@ -1,0 +1,17 @@
+int knapsack(int value[],int wieght[],int n,int W){
+   if(n==0 || W==0){
+    return 0;
+   }
+   if(wieght[n-1]>W){
+     return knapsack(value,wieght,n-1,W);
+   }
+   return max(knapsack(value,wieght,n-1,W-wieght[n-1])+value[n-1],knapsack(value,wieght,n-1,W));
+}
+
+int32_t main(){
+    int wieght[]={10,20,30};
+    int value[]={100,50,150};
+    int W=50;
+       cout<<knapsack(value,wieght,3,W);
+        return 0;
+    }
