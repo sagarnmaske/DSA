@@ -1,0 +1,126 @@
+#include<iostream>
+using namespace std;
+typedef long long ll;
+
+class node{
+    public:
+    int data;
+    node* next;
+
+    node(int val){
+        data = val;
+        next = NULL;
+    }
+};
+void insertAtTail(node* &head,int val){
+    node* n = new node(val);
+    if(head==NULL){
+        head = n;
+        return ;
+    }
+    node* temp = head;
+    while(temp->next!=NULL){
+        temp = temp->next;
+    }
+    temp->next=n;
+}
+void display(node* head){
+    node* temp = head;
+    while(temp!=NULL){
+        cout<<temp->data<<"->";
+        temp = temp->next;
+    }
+    cout<<"NULL";
+}
+void insertAtHead(node* &head,int val){
+    node* n = new node(val);
+    n->next = head;
+    head = n;
+}
+bool search(node* head,int key){
+    node* temp = head;
+    while(temp!=NULL){
+        if(temp->data == key){
+            return true;
+        }
+        temp = temp->next;
+    }
+    return false;
+}
+void deleteNode(node* &head,int val){
+    node* temp = head;
+    if(head==NULL){
+        return;
+    }
+    if(head->next==NULL && head->data == val){
+        delete head;
+        return;
+    }
+    while(temp->next->data!=val){
+        temp=temp->next;
+    }
+    node* todelete = temp->next;
+    temp->next = temp->next->next;
+    delete todelete;
+}
+void deleteNodeAtHead(node* &head){
+    node* deleteNode = head;
+    head = head->next;
+    delete deleteNode;
+
+}
+
+node* reverseLinkedList(node* &head){
+    node* previousPointer = NULL;
+    node* currentPointer = head;
+    node* nextPointer ;
+    while(currentPointer!=NULL){
+        nextPointer = currentPointer->next;
+        currentPointer->next = previousPointer;
+        previousPointer = currentPointer;
+        currentPointer = nextPointer; 
+    }
+
+  return previousPointer;
+}
+node* reverseLinkedListRecursive(node* &head){
+    if(head==NULL || head->next==NULL){
+        return head;
+    }
+    node* newHead = reverseLinkedListRecursive(head->next);
+    head->next->next = head;
+    head->next = NULL;
+    return newHead;
+}
+void solve(){
+        
+    }
+
+int32_t main(){
+        solve();
+        node* head = NULL;
+        insertAtTail(head,1);
+        insertAtTail(head,2);
+        insertAtTail(head,3);
+        insertAtTail(head,4);
+        display(head);
+        cout<<"\n";
+        head=reverseLinkedList(head);
+        display(head);
+        cout<<"\n";
+        head=reverseLinkedListRecursive(head);
+        display(head);
+        cout<<"\n";
+     //   insertAtHead(head,4);
+      //  display(head);
+     //   cout<<"\n";
+       // cout<<search(head,5);
+      //  cout<<"\n";
+     //   deleteNode(head,2);
+     //   display(head);
+       // cout<<"\n";
+      //   deleteNodeAtHead(head);
+     //   display(head);
+       // cout<<"\n";
+        return 0;
+    }
