@@ -1,0 +1,118 @@
+#include<iostream>
+#include<stack>
+using namespace std;
+typedef long long ll;
+#define n 100
+
+// class stack {
+//     int* arr;
+//     int top;
+//     public:
+//     stack(){
+//         arr=new int[n];
+//         top = -1;
+//     }
+//     void push(int x){
+//         if(top==n-1){
+//             cout<<"stack Overflow"<<endl;
+//             return;
+//         }
+//         top++;
+//         arr[top]=x;
+//     }
+//     void pop(){
+//         if(top==-1){
+//             cout<<"No Element To Pop"<<endl;
+//             return;
+//         }
+//         top--;
+//     }
+//     int Top (){
+//         if(top==-1){
+//             cout<<"No Element To Stack"<<endl;
+//             return -1;
+//         }
+//         return arr[top];
+//     }
+//     bool empty(){
+//         return top==-1;
+//     }
+// }
+// ;
+// void reverseSentence(string s){
+//      stack<string>st;
+//     for(int i=0;i<s.length();i++){
+//         string word ="";
+//         while(s[i]!=' ' && i<s.length()){
+//           word+=s[i];
+//           i++;
+//         }
+//       st.push(word);
+//     }
+//     while(!st.empty()){
+//         cout<<st.top()<<" ";
+//         st.pop();
+//     }
+// }
+void insertAtBottom(stack<int> &st,int ele){
+    if(st.empty()){
+        st.push(ele);
+        return;
+    }
+    int topele = st.top();
+    st.pop();
+    insertAtBottom(st,ele);
+    st.push(topele);
+}
+void reverseStack(stack<int> &st){
+    
+    int ele = st.top();
+    if(st.empty()){
+        return ;
+    }
+    st.pop();
+    reverseStack(st);
+    insertAtBottom(st,ele);
+
+}
+
+
+int main(){
+        // stack st;
+        // st.push(1);
+        // st.push(2);
+        // st.push(3);
+        // st.pop();
+        // cout<<st.Top();
+        // cout<<endl;
+        // st.pop();
+        // cout<<st.empty();
+        // cout<<"\n";
+        // st.pop();
+        // cout<<st.empty();
+        // cout<<"\n";
+        // cout<<st.Top();
+        // cout<<"\n";
+        // st.pop();
+        // cout<<"\n"<<"\n";
+        // string s="Hey, how are you doing?";
+        // cout<<endl;
+        // reverseSentence(s);
+        stack<int> st;
+        st.push(1);
+        st.push(2);
+        st.push(3);
+        st.push(4);
+        st.push(5);
+        while(!st.empty()){
+            cout<<st.top()<<" ";
+            st.pop();
+        }
+        cout<<"\n";
+        reverseStack(st);
+        while(!st.empty()){
+            cout<<st.top()<<" ";
+            st.pop();
+        }cout<<endl;
+        return 0;
+    }
