@@ -1,0 +1,20 @@
+public class Main
+{
+    public static int powerTillN(int x,int n){
+        if(x==0){
+            return 0;
+        }
+        if(n==0){
+            return 1;
+        }
+        if(n % 2==0){
+            return powerTillN(x,n/2) * powerTillN(x,n/2);
+        }else{
+            return powerTillN(x,n/2)*powerTillN(x,n/2)*x;
+        }
+
+    }
+	public static void main(String[] args) {
+	    System.out.print(powerTillN(2,5));
+	}
+}
